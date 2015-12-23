@@ -15,5 +15,5 @@
     shell: gem install msgpack
 
   - name: start puppet service
-    service: name=puppet state=started
+    service: name=puppet state=restarted enabled=true
 
