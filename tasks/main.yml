@@ -1,0 +1,19 @@
+---
+  - name: install ruby-devel
+    yum: name=ruby-devel state=installed
+
+  - name: install gcc
+    yum: name=gcc state=installed
+
+  - name: install puppet agent
+    yum: name=puppet state=present
+
+  - name: puppet config
+    lineinfile: dest=/etc/puppet/puppet.conf insertafter="^\[main\]" line="     runinterval=5m"
+
+  - name: install gem
+    shell: gem install msgpack
+
+  - name: start puppet service
+    service: name=puppet state=started
+
