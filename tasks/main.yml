@@ -1,12 +1,27 @@
 ---
   - name: install ruby-devel
+    when: ansible_os_family == 'RedHat'
     yum: name=ruby-devel state=installed
 
   - name: install gcc
+    when: ansible_os_family == 'RedHat'
     yum: name=gcc state=installed
 
   - name: install puppet agent
+    when: ansible_os_family == 'RedHat'
     yum: name=puppet state=present
+
+  - name: install ruby-devel
+    when: ansible_os_family == 'Debian'
+    apt: name=ruby-dev state=installed
+
+  - name: install gcc
+    when: ansible_os_family == 'Debian'
+    apt: name=gcc state=installed
+
+  - name: install puppet agent
+    when: ansible_os_family == 'Debian'
+    apt: name=puppet state=present
 
   - name: puppet config
     lineinfile: dest=/etc/puppet/puppet.conf insertafter="^\[main\]" line="     runinterval=5m"
